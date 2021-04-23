@@ -46,7 +46,11 @@ public class Client {
             getNom() +
             " (" + getNif() + ")\n";
         for (Lloguer lloguer: lloguers) {
-            double quantitat = 0;
+        	
+        	//quantitatPerLloguer(lloguer) -> no es orientació a objectes
+        	double quantitat = lloguer.quantitat();
+        	
+        	/*double quantitat = 0;
             switch (lloguer.getVehicle().getCategoria()) {
                 case Vehicle.BASIC:
                     quantitat += 3;
@@ -64,6 +68,7 @@ public class Client {
                     quantitat += lloguer.getDies() * 6;
                     break;
             }
+            */
 
             // afegeix lloguers freqüents
             bonificacions ++;
@@ -88,4 +93,5 @@ public class Client {
             "Punts guanyats: " + bonificacions + "\n";
         return resultat;
     }
+
 }

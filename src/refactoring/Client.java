@@ -75,9 +75,11 @@ public class Client {
     public String informe2() {
         //double total = 0;
         //int bonificacions = 0;
-        String resultat = "Informe de lloguers del client " +
+        /*
+    	String resultat = "Informe de lloguers del client " +
             getNom() +
             " (" + getNif() + ")\n";
+         */
         for (Lloguer lloguer: lloguers) {
         	
         	//quantitatPerLloguer(lloguer) -> no es orientació a objectes
@@ -125,19 +127,24 @@ public class Client {
         	
         	//bonificacions += lloguer.bonificacions();
         	// composa els resultats d'aquest lloguer
-            resultat += "\t" +
+            /*resultat += "\t" +
                 lloguer.getVehicle().getMarca() +
                 " " +
                 lloguer.getVehicle().getModel() + ": " +
                 (lloguer.quantitat() * 30) + "€" + "\n"; //<-- aqui es consumeix quantitat
-            
+            */
             //total += lloguer.quantitat() * 30;
         }
 
         // afegeix informació final
-        resultat += "Import a pagar: " + importeTotal() + "€\n" +
+        /*resultat += "Import a pagar: " + importeTotal() + "€\n" +
             "Punts guanyats: " + bonificacionsTotal() + "\n";
         return resultat;
+        */
+        
+        return composaCapsalera() +
+        		composaDetall() +
+        		composaPeu();
     }
     
     public double importeTotal() {
@@ -155,4 +162,28 @@ public class Client {
     	}
     	return bonificacions;
 	}
+    
+    public String composaCapsalera() {
+    	String resultat = "Informe de lloguers del client " +
+                getNom() +
+                " (" + getNif() + ")\n";
+    	return resultat;
+    }
+    public String composaDetall() {
+    	String resultat = "";
+    	for (Lloguer lloguer: lloguers) {
+    		resultat += "\t" +
+                lloguer.getVehicle().getMarca() +
+                " " +
+                lloguer.getVehicle().getModel() + ": " +
+                (lloguer.quantitat() * 30) + "€" + "\n"; //<-- aqui es consumeix quantitat
+    	}
+    	return resultat;
+    }
+    public String composaPeu() {
+        String resultat = "";
+        resultat = "Import a pagar: " + importeTotal() + "€\n" +
+                "Punts guanyats: " + bonificacionsTotal() + "\n";
+        return resultat;
+    }
 }

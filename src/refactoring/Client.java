@@ -80,7 +80,7 @@ public class Client {
             getNom() +
             " (" + getNif() + ")\n";
          */
-        for (Lloguer lloguer: lloguers) {
+        //for (Lloguer lloguer: lloguers) {
         	
         	//quantitatPerLloguer(lloguer) -> no es orientació a objectes
         	        	
@@ -134,7 +134,7 @@ public class Client {
                 (lloguer.quantitat() * 30) + "€" + "\n"; //<-- aqui es consumeix quantitat
             */
             //total += lloguer.quantitat() * 30;
-        }
+        //}
 
         // afegeix informació final
         /*resultat += "Import a pagar: " + importeTotal() + "€\n" +
@@ -145,6 +145,11 @@ public class Client {
         return composaCapsalera() +
         		composaDetall() +
         		composaPeu();
+    }
+    public String informeHTML() {
+    	return composaCapsaleraHTML() +
+        		composaDetallHTML() +
+        		composaPeuHTML();
     }
     
     public double importeTotal() {
@@ -186,4 +191,30 @@ public class Client {
                 "Punts guanyats: " + bonificacionsTotal() + "\n";
         return resultat;
     }
+    
+    public String composaCapsaleraHTML() {
+    	return "<h1>Informe de lloguers</h1>\t<p>Informe de lloguers de client <em>" + getNom() +
+    			"</em> (<strong>" + getNif() +"</strong>)</p>\t";
+    }
+    public String composaDetallHTML() {
+    	String resultat = "<table>\t"
+    			+ "<tr><td><strong>Marca</strong></td><td><strong>Model</strong></td><td><strong>Import</strong></td></tr>\t";
+    	for (Lloguer lloguer: lloguers) {
+    		resultat += "<p><tr><td>" +
+                lloguer.getVehicle().getMarca() +
+                "</td><td>" +
+                lloguer.getVehicle().getModel() + "</td><td>" +
+                (lloguer.quantitat() * 30) + "€" + "</td><td></p>\t"; //<-- aqui es consumeix quantitat
+    	}
+    	resultat += "</table>\t";
+    	return resultat;
+    }
+    public String composaPeuHTML() {
+        
+        return "<p>Import a pagar: <em>" + importeTotal() + "€</em></p>\t" +
+                "<p>Punts guanyats: <em>" + bonificacionsTotal() + "</em></p>\t";
+    }
+    
+    
+    
 }

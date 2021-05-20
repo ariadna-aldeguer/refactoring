@@ -31,7 +31,7 @@ public class main {
 		
 	}
 	public static String GestorLloguersLite(Client c){
-        return c.informe();
+        return c.informeHTML();
     }
 
 }
